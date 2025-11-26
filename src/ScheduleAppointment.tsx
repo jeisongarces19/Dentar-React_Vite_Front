@@ -12,11 +12,11 @@ const specialties = [
 
 const dentists = ['Marta Zambrano', 'Briggitte Mosquera', 'Yesenia Mora']
 
-const ScheduleAppointment = () => {
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 1)) // Octubre 2025
-  const [selectedDay, setSelectedDay] = useState(8)
-  const [selectedSpecialty, setSelectedSpecialty] = useState('Ortodoncia')
-  const [selectedDentist, setSelectedDentist] = useState(dentists[0])
+const ScheduleAppointment: React.FC = () => {
+  const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 1))
+  const [selectedDay, setSelectedDay] = useState<number>(8)
+  const [selectedSpecialty, setSelectedSpecialty] = useState<string>(specialties[0])
+  const [selectedDentist, setSelectedDentist] = useState<string>(dentists[0])
 
   const monthName = currentDate.toLocaleString('es-ES', {
     month: 'long',
@@ -44,7 +44,6 @@ const ScheduleAppointment = () => {
       <h2 className="schedule-title">ASIGNACIÓN DE CITAS</h2>
 
       <div className="schedule-main">
-        {/* Calendario */}
         <div className="schedule-card calendar-card">
           <div className="calendar-header">
             <button onClick={handlePrevMonth}>{'<'}</button>
@@ -82,7 +81,6 @@ const ScheduleAppointment = () => {
           </div>
         </div>
 
-        {/* Especialidades */}
         <div className="schedule-card specialties-card">
           <div className="specialty-pill">
             <span className="specialty-check">✔</span>
@@ -107,7 +105,6 @@ const ScheduleAppointment = () => {
       </div>
 
       <div className="schedule-bottom">
-        {/* Paciente */}
         <div className="schedule-card patient-card">
           <div className="patient-avatar">
             <span>JP</span>
@@ -120,7 +117,6 @@ const ScheduleAppointment = () => {
           </div>
         </div>
 
-        {/* Odontólogos */}
         <div className="schedule-card dentists-card">
           <ul className="dentists-list">
             {dentists.map(d => (

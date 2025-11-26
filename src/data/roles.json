@@ -25,11 +25,15 @@
     "registrar",
     "agendar",
     "facturacion",
-    "perfil"
+    "perfil",
+    "soporte"
   ],
   "Cliente": [
     "inicio",
     "agendamiento",
-    "perfil"
+    "perfil",
+    "soporte",
+    "pago",
+    "configuracion"
   ]
 }

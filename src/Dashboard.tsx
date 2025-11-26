@@ -1,8 +1,28 @@
 import React from 'react'
-import appointments from './data/appointments.json'
-import stats from './data/stats.json'
+import appointmentsJson from './data/appointments.json'
+import statsJson from './data/stats.json'
+import type { Role } from './Sidebar'
 
-const Dashboard = ({ role }) => {
+type Appointment = {
+  id: number
+  name: string
+  treatment: string
+  time: string
+}
+
+type Stats = {
+  pendingConsults: number
+  weekConsults: number
+  completedTreatments: number
+  diagnosisEfficiency: number
+}
+
+const appointments = appointmentsJson as Appointment[]
+const stats = statsJson as Stats
+
+type Props = { role: Role; setActiveMenu: (key: string) => void }
+
+const Dashboard: React.FC<Props> = ({ role, setActiveMenu }) => {
   return (
     <div className="dashboard">
       <section className="welcome">
@@ -54,7 +74,7 @@ const Dashboard = ({ role }) => {
             <p className="indicator-value">{stats.diagnosisEfficiency}%</p>
           </div>
         </div>
-        <button className="btn-primary">Sedes</button>
+        <button className="btn-primary" onClick={() => setActiveMenu('sedes')}>Sedes</button>
       </section>
     </div>
   )

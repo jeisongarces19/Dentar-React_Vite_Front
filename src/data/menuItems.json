@@ -53,5 +53,8 @@
     "key": "configuracion",
     "label": "Configuración",
     "section": "Inferior"
+  },
+  { "key": "pago", "label": "Pago", "section": "Principal" 
   }
+
 ]

@@ -1,6 +1,30 @@
 import React, { useState } from 'react'
 
-const emptyForm = {
+export type PatientForm = {
+  nombres: string
+  apellidos: string
+  fechaNacimiento: string
+  cedula: string
+  telefono: string
+  correo: string
+  sexo: string
+  estadoCivil: string
+  direccion: string
+  edad: string
+  condicionesMedicas: string
+  alergias: string
+  medicamentos: string
+  enfermedadesCronicas: string
+  motivoConsulta: string
+  procedimiento: string
+  notas: string
+  observaciones: string
+  evolucion: string
+  formulacion: string
+  fechaUltimoTratamiento: string
+}
+
+const emptyForm: PatientForm = {
   nombres: '',
   apellidos: '',
   fechaNacimiento: '',
@@ -24,15 +48,20 @@ const emptyForm = {
   fechaUltimoTratamiento: ''
 }
 
-const RegisterPatient = ({ onSave, onCancel }) => {
-  const [form, setForm] = useState(emptyForm)
+type Props = {
+  onSave: (p: PatientForm) => void
+  onCancel: () => void
+}
 
-  const handleChange = (e) => {
+const RegisterPatient: React.FC<Props> = ({ onSave, onCancel }) => {
+  const [form, setForm] = useState<PatientForm>(emptyForm)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setForm(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     onSave(form)
     setForm(emptyForm)
@@ -40,7 +69,7 @@ const RegisterPatient = ({ onSave, onCancel }) => {
 
   const handleCancel = () => {
     setForm(emptyForm)
-    onCancel && onCancel()
+    onCancel()
   }
 
   return (

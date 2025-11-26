@@ -1,25 +1,34 @@
 import React, { useState } from 'react'
-import Sidebar from './Sidebar'
+import Sidebar, { Role } from './Sidebar'
 import TopBar from './TopBar'
 import Dashboard from './Dashboard'
-import RegisterPatient from './RegisterPatient'
+import RegisterPatient, { PatientForm } from './RegisterPatient'
 import ScheduleAppointment from './ScheduleAppointment'
+import Administracion from './Administracion'
+import CrearUsuario from './CrearUsuario'
+import Support from './Support'
+import Configuracion from './Configuracion'
+import Facturacion from './Facturacion'
+import FacturaImprimir from './FacturaImprimir'
+import Sedes from './Sedes'
+import Pago from './Pago'
 
-const App = () => {
-  const [role, setRole] = useState('Administrador')
-  const [activeMenu, setActiveMenu] = useState('inicio')
-  const [patients, setPatients] = useState([])
 
-  const handleSavePatient = (patient) => {
+
+
+const App: React.FC = () => {
+  const [role, setRole] = useState<Role>('Administrador')
+  const [activeMenu, setActiveMenu] = useState<string>('inicio')
+  const [patients, setPatients] = useState<(PatientForm & { id: number })[]>([])
+
+  const handleSavePatient = (patient: PatientForm) => {
     const withId = { id: Date.now(), ...patient }
     setPatients(prev => [...prev, withId])
     console.log('Paciente guardado (JSON):', withId)
   }
 
   const renderContent = () => {
-    if (activeMenu === 'inicio') {
-      return <Dashboard role={role} />
-    }
+    if (activeMenu === 'inicio') return <Dashboard role={role} setActiveMenu={setActiveMenu} />
     if (activeMenu === 'registrar') {
       return (
         <RegisterPatient
@@ -28,9 +37,20 @@ const App = () => {
         />
       )
     }
-    if (activeMenu === 'agendar') {
-      return <ScheduleAppointment />
-    }
+    if (activeMenu === 'agendar') return <ScheduleAppointment />
+    if (activeMenu === 'administracion') return <Administracion setActiveMenu={setActiveMenu} />
+    if (activeMenu === 'crearusuario') return <CrearUsuario setActiveMenu={setActiveMenu} />
+    if (activeMenu === 'soporte') return <Support />
+    if (activeMenu === 'configuracion') return <Configuracion />
+    if (activeMenu === 'facturacion')
+      return <Facturacion setActiveMenu={setActiveMenu} />
+    if (activeMenu === 'facturaImprimir')
+      return <FacturaImprimir />
+    if (activeMenu === 'sedes') return <Sedes />
+    if (activeMenu === 'pago') return <Pago />
+
+
+
     return (
       <div className="content-placeholder">
         <h2>{activeMenu.toUpperCase()}</h2>
